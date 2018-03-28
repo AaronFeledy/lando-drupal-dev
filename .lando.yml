@@ -1,0 +1,10 @@
+name: drupal
+recipe: drupal8
+config:
+  xdebug: true
+  drush: global:~8
+
+services:
+  appserver:
+    run:
+      - "echo Downloading Drupal...&& drush pm-download --yes --drupal-project-rename=. --destination=$LANDO_MOUNT"
