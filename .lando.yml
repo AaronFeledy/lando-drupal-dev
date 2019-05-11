@@ -5,5 +5,6 @@ config:
 
 services:
   appserver:
-    run:
-      - "echo Downloading Drupal...&& drush pm-download --yes --drupal-project-rename=. --destination=$LANDO_MOUNT"
+    build:
+      - echo "Downloading Drupal..."
+      - mv .lando.yml ~/.lando.yml && drush pm-download drupal --yes --dev --drupal-project-rename=. --destination=$LANDO_MOUNT"; mv ~/.lando.yml .lando.yml
