@@ -6,7 +6,16 @@ config:
 
 services:
   appserver:
+    build_as_root:
+      - apt update
+      - apt install patchutils
+
     build:
       - echo "Cloning the Drupal project..."
       - git clone http://git.drupal.org/project/drupal.git /app/drupal
       - cd /app/drupal && COMPOSER_PROCESS_TIMEOUT=600 composer install
+
+tooling:
+  interdiff:
+    service: appserver
+    description: Creates an incremental Git patch from two patches
