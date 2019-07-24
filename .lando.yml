@@ -1,10 +1,12 @@
-name: drupal
+name: drupal-dev
 recipe: drupal8
 config:
+  webroot: drupal
   xdebug: true
 
 services:
   appserver:
     build:
-      - echo "Downloading Drupal..."
-      - mv .lando.yml ~/.lando.yml && drush pm-download drupal --yes --dev --drupal-project-rename=. --destination=$LANDO_MOUNT"; mv ~/.lando.yml .lando.yml
+      - echo "Cloning the Drupal project..."
+      - git clone http://git.drupal.org/project/drupal.git /app/drupal
+      - cd /app/ && COMPOSER_PROCESS_TIMEOUT=600 composer install
